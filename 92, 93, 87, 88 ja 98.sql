@@ -1,4 +1,4 @@
--- Tootmisvaatluse loomine, mis käivitatakse, kui tabel luuakse
+-- Tootmisvaatluse loomine, mis kÃ¤ivitatakse, kui tabel luuakse
 CREATE TRIGGER trDavidMyrsethTrigger
 ON DATABASE
 FOR CREATE_TABLE
@@ -19,7 +19,7 @@ BEGIN
 PRINT 'Your table was created, you can modifie or delete'; 
 END
 
--- Uuenda tootmisvaatlust, et see tühistaks kõik tegevused
+-- Uuenda tootmisvaatlust, et see tÃ¼histaks kÃµik tegevused
 ALTER TRIGGER trDavidMyrsethTrigger
 ON DATABASE
 FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE
@@ -43,7 +43,7 @@ END
 
 --93
 
--- Teine tootmisvaatluse loomine, mis tühistab tegevused
+-- Teine tootmisvaatluse loomine, mis tÃ¼histab tegevused
 CREATE TRIGGER tr_DavidMyrsethTrigger
 ON DATABASE
 FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE
@@ -53,7 +53,7 @@ ROLLBACK;
 PRINT 'You cannot create, alter or drop a table in the current database';
 END
 
--- Tootmisvaatluse loomine, mis tühistab tegevused serveri tasemel
+-- Tootmisvaatluse loomine, mis tÃ¼histab tegevused serveri tasemel
 CREATE TRIGGER tr_DavidMyrsethTrigger
 ON ALL SERVER
 FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE
@@ -131,7 +131,7 @@ INSERT INTO tblEmployees VALUES ('Tina', 'Female', 67000);
 INSERT INTO tblEmployees VALUES ('Ben', 'Male', 80000);
 GO
 
--- Valige töötajad, kelle palk on vähemalt 50000, kuid vähem kui 60000
+-- Valige tÃ¶Ã¶tajad, kelle palk on vÃ¤hemalt 50000, kuid vÃ¤hem kui 60000
 SELECT id, Name, Gender, Salary
 FROM tblEmployees
 WHERE Salary >= 50000
@@ -143,16 +143,16 @@ ORDER BY Name;
 
 --88
 
--- Valige töötajad tabelist TableA, mis ei ole tabelis TableB
+-- Valige tÃ¶Ã¶tajad tabelist TableA, mis ei ole tabelis TableB
 SELECT id, Name, Gender FROM TableA
 EXCEPT
 SELECT id, Name, Gender FROM TableB;
 
--- Valige töötajad tabelist TableA, kes ei ole tabelis TableB
+-- Valige tÃ¶Ã¶tajad tabelist TableA, kes ei ole tabelis TableB
 SELECT id, Name, Gender FROM TableA
 WHERE id NOT IN (SELECT id FROM TableB);
 
--- Valige töötajad, kelle id ei ole tabelis TableB
+-- Valige tÃ¶Ã¶tajad, kelle id ei ole tabelis TableB
 INSERT INTO TableA VALUES (1, 'Mark', 'Male');
 
 SELECT id, Name, Gender FROM TableA
@@ -174,7 +174,7 @@ WHERE id NOT IN (SELECT id, Name FROM TableB);
 -- Tabeli loomine Sales
 CREATE TABLE Sales(
     Product NVARCHAR(50),           -- Toode
-    SaleAmount INT                  -- Müügi summa
+    SaleAmount INT                  -- MÃ¼Ã¼gi summa
 );
 GO
 
@@ -186,24 +186,24 @@ INSERT INTO Sales VALUES ('Speaker', 400);
 INSERT INTO Sales VALUES ('Laptop', 600);
 GO
 
--- Müügi summa kokku arvestamine toote kaupa
+-- MÃ¼Ã¼gi summa kokku arvestamine toote kaupa
 SELECT Product, SUM(SaleAmount) AS TotalSales
 FROM Sales
 GROUP BY Product;
 
--- Müügi summa üle 1000 arvestamine
+-- MÃ¼Ã¼gi summa Ã¼le 1000 arvestamine
 SELECT Product, SUM(SaleAmount) AS TotalSales
 FROM Sales
 GROUP BY Product 
 HAVING SUM(SaleAmount) > 1000;
 
--- Müügi summa toote nime alusel
+-- MÃ¼Ã¼gi summa toote nime alusel
 SELECT Product, SUM(SaleAmount) AS TotalSales
 FROM Sales
 WHERE Product IN ('iPhone', 'Speakers')
 GROUP BY Product;
 
--- Müügi summa toote nime alusel, kuid vale süntaks
+-- MÃ¼Ã¼gi summa toote nime alusel, kuid vale sÃ¼ntaks
 SELECT Product, SUM(SaleAmount) AS TotalSales
 FROM Sales
 GROUP BY Product
